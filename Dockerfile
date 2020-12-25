@@ -3,7 +3,7 @@ FROM alpeware/chrome-headless-trunk:rev-786673
 RUN echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections
 RUN apt-get update -y &&\
  DEBIAN_FRONTEND=noninteractive apt-get install -yq\
- fontconfig fonts-dejavu ttf-mscorefonts-installer curl gnupg git &&\
+ fontconfig fonts-dejavu fonts-symbola fonts-noto-cjk fonts-ocr-b ttf-mscorefonts-installer curl gnupg git &&\
  rm -rf /var/lib/apt/lists/*
 # install node
 RUN curl -sL https://deb.nodesource.com/setup_12.x  | bash -
@@ -22,7 +22,7 @@ RUN chown -R app:app $HOME
 RUN pwd
 # Change to the app user.
 USER app
-RUN git clone https://github.com/alvarcarto/url-to-pdf-api pdf-rendering-srv
+RUN git clone https://github.com/csfrez/url-to-pdf-api pdf-rendering-srv
 WORKDIR $APP_HOME
 RUN npm install --only=prod
 
